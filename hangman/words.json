@@ -1,0 +1,54 @@
+[
+    {
+        "max_mistakes": 5,
+        "word": "apple"
+    },
+    {
+        "max_mistakes": 7,
+        "word": "hangman"
+    },
+    {
+        "max_mistakes": 6,
+        "word": "python"
+    },
+    {
+        "max_mistakes": 4,
+        "word": "wolf"
+    },
+    {
+        "max_mistakes": 3,
+        "word": "cat"
+    },
+    {
+        "max_mistakes": 9,
+        "word": "awakening"
+    },
+    {
+        "max_mistakes": 4,
+        "word": "test"
+    },
+    {
+        "max_mistakes": 7,
+        "word": "website"
+    },
+    {
+        "max_mistakes": 4,
+        "word": "name"
+    },
+    {
+        "max_mistakes": 5,
+        "word": "tests"
+    },
+    {
+        "max_mistakes": 4,
+        "word": "love"
+    },
+    {
+        "max_mistakes": 6,
+        "word": "tambal"
+    },
+    {
+        "max_mistakes": 5,
+        "word": "quest"
+    }
+]
