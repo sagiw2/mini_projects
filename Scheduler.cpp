@@ -15,13 +15,17 @@ void Scheduler::insertToTasksList(Task task)
 
 void Scheduler::schedulePeriodic(const Duration& interval, const std::function<void(void)> callback)
 {
-    Task newTask{callback, interval, std::chrono::steady_clock::now() + interval, TaskType::Periodic};
+    // Task newTask{callback, interval, std::chrono::steady_clock::now() + interval, TaskType::Periodic};
+    Task newTask{TaskType::Periodic, nextTaskID, std::chrono::steady_clock::now() + interval, interval, callback};
     insertToTasksList(std::move(newTask));
+    return nextTaskID++;
 }
 
 void Scheduler::scheduleOneShot(const TimePoint& activationTime, const std::function<void(void)> callback)
 {
-    insertToTasksList(Task{callback, static_cast<Duration>(0), activationTime, TaskType::OneShot});
+    // insertToTasksList(Task{callback, static_cast<Duration>(0), activationTime, TaskType::OneShot});
+    insertToTasksList(Task{TaskType::OneShot, nextTaskID, activationTime, static_cast<Duration>(0), callback});
+    return nextTaskID++;
 }
 
 void Scheduler::runFor(const Duration& duration)
@@ -53,4 +57,15 @@ void Scheduler::runFor(const Duration& duration)
         }
         now = std::chrono::steady_clock::now();
     }
+}
+
+bool Scheduler::cancel(const TaskID idToRemove)
+{
+    auto taskIdx = std::find_if(tasks.begin(), tasks.end(), [idToRemove] (const Task& task) {return task.id == idToRemove;} );
+    if (taskIdx != tasks.end())
+    {
+        tasks.erase(taskIdx);
+        return true;
+    }
+    return false;
 }

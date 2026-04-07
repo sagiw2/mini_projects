@@ -4,6 +4,7 @@
 
 using Duration = std::chrono::milliseconds;
 using TimePoint = std::chrono::steady_clock::time_point;
+using TaskID = uint;
 
 enum class TaskType
 {
@@ -12,8 +13,9 @@ enum class TaskType
 };
 
 struct Task {
-    std::function<void(void)> callback;
-    Duration interval;
-    TimePoint nextExecutionTime;
     TaskType type;
+    TaskID id;
+    TimePoint nextExecutionTime;
+    Duration interval;
+    std::function<void(void)> callback;
 };
