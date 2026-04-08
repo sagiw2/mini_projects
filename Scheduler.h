@@ -14,6 +14,7 @@ private:
 public:
     TaskID schedulePeriodic(const Duration& interval, const std::function<void(void)> callback);
     TaskID scheduleOneShot(const TimePoint& activationTime, const std::function<void(void)> callback);
-    void runFor(const Duration& duration);
     bool cancel(const TaskID);
+    bool reschedule(TaskID id, TimePoint newExecutionTime);
+    void runFor(const Duration& duration);
 };
