@@ -6,5 +6,5 @@ class LED
 private:
     bool isOn{false};
 public:
-    void toggle(TimePoint startTime);
+    void toggle(const TimePoint startTime);
 };

@@ -21,10 +21,5 @@ file(GLOB _SOURCES
     )
 
 add_executable(app
-                app.cpp
                 ${_SOURCES}
             )
-
-target_link_libraries(app
-                        PRIVATE
-                    )

@@ -4,7 +4,7 @@
 #include <thread>
 
 
-void Scheduler::insertToTasksList(Task task)
+void Scheduler::insertToTasksList(Task&& task)
 {
     auto pos = std::find_if(tasks.begin(), tasks.end(),
                             [&](const auto& t) {
@@ -13,17 +13,15 @@ void Scheduler::insertToTasksList(Task task)
     tasks.insert(pos, std::move(task));
 }
 
-TaskID Scheduler::schedulePeriodic(const Duration& interval, const std::function<void(void)> callback)
+TaskID Scheduler::schedulePeriodic(const Duration& interval, const std::function<void(void)>& callback)
 {
-    // Task newTask{callback, interval, std::chrono::steady_clock::now() + interval, TaskType::Periodic};
     Task newTask{TaskType::Periodic, nextTaskID, std::chrono::steady_clock::now() + interval, interval, callback};
     insertToTasksList(std::move(newTask));
     return nextTaskID++;
 }
 
-TaskID Scheduler::scheduleOneShot(const TimePoint& activationTime, const std::function<void(void)> callback)
+TaskID Scheduler::scheduleOneShot(const TimePoint& activationTime, const std::function<void(void)>& callback)
 {
-    // insertToTasksList(Task{callback, static_cast<Duration>(0), activationTime, TaskType::OneShot});
     insertToTasksList(Task{TaskType::OneShot, nextTaskID, activationTime, static_cast<Duration>(0), callback});
     return nextTaskID++;
 }
@@ -39,7 +37,7 @@ bool Scheduler::cancel(const TaskID idToRemove)
     return false;
 }
 
-bool Scheduler::reschedule(TaskID id, TimePoint newExecutionTime)
+bool Scheduler::reschedule(const TaskID id, const TimePoint newExecutionTime)
 {
     auto taskItr = std::find_if(tasks.begin(), tasks.end(), [id] (const Task& task) {return task.id == id;} );
     if (taskItr != tasks.end())

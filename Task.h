@@ -4,7 +4,7 @@
 
 using Duration = std::chrono::milliseconds;
 using TimePoint = std::chrono::steady_clock::time_point;
-using TaskID = uint;
+using TaskID = std::uint32_t;
 
 enum class TaskType
 {

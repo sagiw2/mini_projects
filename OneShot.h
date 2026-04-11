@@ -4,7 +4,6 @@
 
 class OneShot
 {
-private:
 public:
-    void activate(TimePoint startTime);
+    void activate(const TimePoint startTime);
 };
