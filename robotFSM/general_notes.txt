@@ -1,0 +1,22 @@
+enum class StateId {
+    Idle,
+    Patrol,
+    Tracking,
+    Recovering,
+    Error
+};
+
+enum class TimeoutId {
+    TrackingLost,
+    RecoveryDone
+};
+
+Event = variant<
+    StartCommand,
+    StopCommand,
+    TargetSeen,
+    TargetLost,
+    FaultDetected,
+    ResetFault,
+    Timeout{ TimeoutId id }
+    >;
